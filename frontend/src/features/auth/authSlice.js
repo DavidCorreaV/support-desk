@@ -31,9 +31,33 @@ export const login = createAsyncThunk("auth/login", async(user, thunkAPI) => {
 
 export const authSlice = createSlice({
     name: "auth",
-    initialState: initialState,
-    reducers: {},
-    extraReducers: (builder) => {},
+    initialState,
+    reducers: {
+        reset: (state) => {
+            state.isError = false;
+            state.isLoading = false;
+            state.isSuccess = false;
+            state.message = "";
+        },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(register.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(register.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.user = action.payload;
+            })
+            .addCase(register.rejected, (state, action) => {
+                state.isLoading = false;
+                state.user = null;
+                state.isError = true;
+                state.message = action.payload;
+            });
+    },
 });
 
+export const { reset } = authSlice.actions;
 export default authSlice.reducer;
