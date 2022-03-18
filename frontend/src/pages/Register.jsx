@@ -23,7 +23,7 @@ const Register = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message);
+      toast.error(null);
       console.log(message);
     }
     if (isSuccess || user) {
