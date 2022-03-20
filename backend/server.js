@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/tickets", require("./routes/ticketRoutes"));
 
 //Setup custom error handler
 app.use(errorHandler);
