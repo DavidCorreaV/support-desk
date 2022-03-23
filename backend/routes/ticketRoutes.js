@@ -8,6 +8,9 @@ const {
     deleteTicket,
 } = require("../controllers/ticketContoller");
 
+const noteRouter = require("../routes/noteRoutes");
+router.use("/:ticketId/notes", noteRouter);
+
 const { protect } = require("../middleware/authMiddleware");
 
 router.route("/").get(protect, getTickets).post(protect, createTicket);
